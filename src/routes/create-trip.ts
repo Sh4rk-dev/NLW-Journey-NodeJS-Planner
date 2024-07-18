@@ -2,15 +2,11 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import z from "zod";
 import { prisma } from "../lib/prisma";
-import dayjs from "dayjs";
 import { getMailClient } from "../lib/mail";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-import "dayjs/locale/pt-br";
 
-dayjs.locale("pt-br");
-dayjs.extend(localizedFormat);
 
 import nodemailer from "nodemailer";
+import { dayjs } from "../lib/dayjs";
 export async function createTrip(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
     "/trips",
@@ -87,7 +83,7 @@ export async function createTrip(app: FastifyInstance) {
         html: `
         <div style="font-family: sans-serif; font-size: 16px; line-height: 1.6">
         <p>
-            Você colicitou a ciração de uma vigem para
+            Você solicitou a criação de uma vigem para
             <strong> ${destination}</strong> nas datas de
             <strong> ${formattedStartDate} até ${formattedEndDate} de Agosto de 2024</strong>.
         </p>
